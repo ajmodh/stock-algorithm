@@ -1,0 +1,16 @@
+from django.contrib import admin
+
+from . import models
+
+class RunAdmin(admin.ModelAdmin):
+    list_display = ('stock', 'strategy', 'profit', 'average', 'winrate', 'trades', 'default')
+    list_filter = ('default', 'strategy', 'stock' )
+
+    def get_queryset(self, request):
+        qs = super(RunAdmin, self).get_queryset(request)
+        return qs.distinct('stock', 'strategy', 'default')
+
+
+admin.site.register(models.Industry)
+admin.site.register(models.Stock)
+admin.site.register(models.Run, RunAdmin)

@@ -1,0 +1,7 @@
+import ema
+
+def macd(list, small_ema, long_ema):
+    ema_small = ema.expon_moving_avg(list, small_ema)
+    ema_long = ema.expon_moving_avg(list, long_ema)
+    macd = ema_small - ema_long
+    return macd

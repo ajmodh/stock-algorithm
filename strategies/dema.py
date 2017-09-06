@@ -1,0 +1,12 @@
+import sys
+import ema as e
+sys.setrecursionlimit(10000)
+
+def smoothing_const(days):
+     return (2.0 / (days + 1))
+
+def double_exponential_moving_average(list_close,days_dema):
+    ema = e.expon_moving_avg(list_close, days_dema)
+    ema_of_ema = e.expon_moving_avg(ema, days_dema)
+    dema = (2 * ema) - ema_of_ema
+    return dema
